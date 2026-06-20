@@ -1,6 +1,7 @@
 package support.drivers;
 
 import io.appium.java_client.AppiumBy;
+import io.appium.java_client.AppiumBy.ByAndroidUIAutomator;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.openqa.selenium.By;
@@ -85,4 +86,12 @@ public class Core {
     public void sendKeys(By locator, String value) {
         waitFor(locator).sendKeys(value);
     }
+
+    public void scrollToElement(String locator) {
+        String path = "new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(locator);";
+        path = path.replace("locator", locator);
+        driver.findElement(AppiumBy.androidUIAutomator(path));
+    }
 }
+
+

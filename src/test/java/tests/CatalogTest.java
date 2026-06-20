@@ -9,14 +9,14 @@ import org.junit.Assert;
 import org.junit.Test;
 import support.execution.BaseTest;
 
-public class Catalog extends BaseTest {
+public class CatalogTest extends BaseTest {
     PageCatalog pageCatalog = new PageCatalog(core);
     PageCart pageCart = new PageCart(core);
     PageProduct pageProduct = new PageProduct(core);
     PageCheckout pageCheckout = new PageCheckout(core);
 
     @Test
-    public void addProductToCart() {
+    public void userBuyMoreThanOneProduct() {
         int quantity = 3;
 
         pageCatalog.selectProduct("Sauce Labs Backpack");
@@ -29,7 +29,13 @@ public class Catalog extends BaseTest {
         Assert.assertEquals(quantity, count);
         pageCart.proceedToCheckout();
         pageCheckout.loginCheckout("bob@example.com", "10203040");
-
+        pageCheckout.fillInAddress();
+        pageCheckout.enterCardDetails();
+        int numberItems = pageCheckout.getNumberItems();
+        Assert.assertEquals(quantity, numberItems);
+        String totalItems = pageCheckout.getTotal(quantity);
+        String totalText = pageCheckout.getTotalText();
+        Assert.assertEquals(totalItems, totalText);
 
     }
 

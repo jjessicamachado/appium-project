@@ -54,8 +54,12 @@
             <version>4.44.0</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>net.datafaker</groupId>
+            <artifactId>datafaker</artifactId>
+            <version>1.9.0</version>
+        </dependency>
     </dependencies>
-
-
 
 </project>
