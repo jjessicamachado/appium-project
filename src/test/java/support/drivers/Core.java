@@ -28,7 +28,7 @@ public class Core {
         }
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
     }
-    
+
     public void quit() {
         if (driver != null) {
             driver.quit();
@@ -56,36 +56,33 @@ public class Core {
 
     // ===== ACTIONS =====
 
-    public void clickByXpath(String element) {
-        By path = AppiumBy.xpath(element);
-        WebElement el = wait.until(ExpectedConditions.visibilityOfElementLocated(path));
-        el.click();
+    private WebElement waitFor(By locator) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-    public void clickByXpath(String element, String value) {
-        By path = AppiumBy.xpath(element.replace("arg0", value));
-        WebElement el = wait.until(ExpectedConditions.visibilityOfElementLocated(path));
-        el.click();
+    public void click(By locator) {
+        waitFor(locator).click();
     }
 
-    public void clickByAccId(String element) {
-        By path = AppiumBy.accessibilityId(element);
-        WebElement el = wait.until(ExpectedConditions.visibilityOfElementLocated(path));
-        el.click();
+     public void click(String locator, String value) {
+        By xpath = AppiumBy.xpath(locator.replace("arg0", value));
+        waitFor(xpath).click();
     }
 
-    public WebElement findElement(String element) {
-        By path = AppiumBy.xpath(element);
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(path));
+    public WebElement findElement(By locator) {
+        return waitFor(locator);
     }
 
-     public WebElement findElement(String element, String value) {
-        By path = AppiumBy.xpath(element.replace("arg0", value));
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(path));
+     public WebElement findElement(String locator, String value) {
+        By xpath = AppiumBy.xpath(locator.replace("arg0", value));
+        return waitFor(xpath);
     }
 
-    public String getElementText(String element) {
-        By path = AppiumBy.xpath(element);
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(path)).getText();
+    public String getElementText(By locator) {
+        return waitFor(locator).getText();
+    }
+
+    public void sendKeys(By locator, String value) {
+        waitFor(locator).sendKeys(value);
     }
 }

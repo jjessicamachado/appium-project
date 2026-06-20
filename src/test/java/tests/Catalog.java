@@ -2,6 +2,7 @@ package tests;
 
 import objects.products.PageCart;
 import objects.products.PageCatalog;
+import objects.products.PageCheckout;
 import objects.products.PageProduct;
 
 import org.junit.Assert;
@@ -12,6 +13,7 @@ public class Catalog extends BaseTest {
     PageCatalog pageCatalog = new PageCatalog(core);
     PageCart pageCart = new PageCart(core);
     PageProduct pageProduct = new PageProduct(core);
+    PageCheckout pageCheckout = new PageCheckout(core);
 
     @Test
     public void addProductToCart() {
@@ -26,5 +28,10 @@ public class Catalog extends BaseTest {
         int count = pageCart.getProductQuantity();
         Assert.assertEquals(quantity, count);
         pageCart.proceedToCheckout();
+        pageCheckout.loginCheckout("bob@example.com", "10203040");
+
+
     }
+
+
 }

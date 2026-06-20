@@ -1,4 +1,7 @@
 package objects.products;
+import org.openqa.selenium.By;
+
+import io.appium.java_client.AppiumBy;
 import support.drivers.Core;
 
 public class PageProduct {
@@ -8,17 +11,17 @@ public class PageProduct {
         this.core = core;
     }
 
-    private static final String locator_add_to_cart = "Add To Cart button";
+    private static final By locator_add_to_cart = AppiumBy.accessibilityId("Add To Cart button");
     private static final String locator_cart_index = "//android.view.ViewGroup[@content-desc=\"cart badge\"]/android.widget.TextView[@text=\"arg0\"]";
-    private static final String locator_open_cart = "//android.view.ViewGroup[@content-desc=\"cart badge\"]/android.widget.ImageView";
-    private static final String locator_cart_title = "//android.widget.TextView[@text=\"My Cart\"]";
+    private static final By locator_open_cart = AppiumBy.xpath("//android.view.ViewGroup[@content-desc=\"cart badge\"]/android.widget.ImageView");
+    private static final By locator_cart_title = AppiumBy.xpath("//android.widget.TextView[@text=\"My Cart\"]");
 
     public void clickToAddCart() {
-        core.clickByAccId(locator_add_to_cart);
+        core.click(locator_add_to_cart);
     }
 
     public void openCart() {
-        core.clickByXpath(locator_open_cart);
+        core.click(locator_open_cart);
     }
 
     public boolean isCartDisplayed() {
